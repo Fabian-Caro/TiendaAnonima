@@ -3,6 +3,10 @@
 class Conexion{
     private $mysqlConexion;
     private $resultado;
+
+    public function __construct(){
+        $this->abrirConexion();
+    }
     
     public function abrirConexion(){
         $this -> mysqlConexion = new mysqli("localhost", "root", "1234", "tiendaanonima");
@@ -10,6 +14,7 @@ class Conexion{
     
     public function ejecutarConsulta($sentenciaSQL){
         $this -> resultado = $this -> mysqlConexion -> query($sentenciaSQL);
+        return $this->resultado;
     }
     
     public function siguienteRegistro(){

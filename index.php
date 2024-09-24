@@ -1,16 +1,18 @@
 <?php
-require ("logica/Producto.php");
-require ("logica/Categoria.php");
-require ("logica/Marca.php");
+require("logica/Producto.php");
+require("logica/Categoria.php");
+require("logica/Marca.php");
 ?>
 <html>
+
 <head>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	<link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+		rel="stylesheet">
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
+
 <body>
 	<div class="container">
 		<div class="row">
@@ -32,31 +34,33 @@ require ("logica/Marca.php");
 			<div class="collapse navbar-collapse" id="navbarNavDropdown">
 				<ul class="navbar-nav">
 					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
-						href="#" role="button" data-bs-toggle="dropdown"
-						aria-expanded="false">Marca</a>
+							href="#" role="button" data-bs-toggle="dropdown"
+							aria-expanded="false">Marca</a>
 						<ul class="dropdown-menu">
-                            <?php 
-                            $marca = new Marca();
-                            $marcas = $marca -> consultarTodos();
-                            foreach ($marcas as $marcaActual) {
-                                echo "<li><a class='dropdown-item' href='#'>" . $marcaActual -> getNombre() . "</a></li>"; 
-                            }
-                            ?>
-						</ul></li>
+							<?php
+							$marca = new Marca();
+							$marcas = $marca->consultarTodos();
+							foreach ($marcas as $marcaActual) {
+								echo "<li><a class='dropdown-item' href='#'>" . $marcaActual->getNombre() . "</a></li>";
+							}
+							?>
+						</ul>
+					</li>
 				</ul>
 				<ul class="navbar-nav">
 					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
-						href="#" role="button" data-bs-toggle="dropdown"
-						aria-expanded="false">Categoria</a>
+							href="#" role="button" data-bs-toggle="dropdown"
+							aria-expanded="false">Categoria</a>
 						<ul class="dropdown-menu">
-                            <?php 
-                            $categoria = new Categoria();
-                            $categorias = $categoria -> consultarTodos();
-                            foreach ($categorias as $categoriaActual) {
-                                echo "<li><a class='dropdown-item' href='#'>" . $categoriaActual -> getNombre() . "</a></li>"; 
-                            }
-                            ?>
-						</ul></li>
+							<?php
+							$categoria = new Categoria();
+							$categorias = $categoria->consultarTodos();
+							foreach ($categorias as $categoriaActual) {
+								echo "<li><a class='dropdown-item' href='#'>" . $categoriaActual->getNombre() . "</a></li>";
+							}
+							?>
+						</ul>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -67,38 +71,43 @@ require ("logica/Marca.php");
 				<div class="card border-primary">
 					<div class="card-header text-bg-info">Tienda Anonima</div>
 					<div class="card-body">
-    					<?php
-    					$i=0;
-                        $producto = new Producto();
-                        $productos = $producto->consultarTodos();
-                        foreach ($productos as $productoActual) {
-                            if($i%4 == 0){
-                                echo "<div class='row mb-3'>";
-                            }
-                            echo "<div class='col-lg-3 col-md-4 col-sm-6' >";
-                            echo "<div class='card text-bg-light'>";
-                            echo "<div class='card-body'>";
-                            echo "<div class='text-center'><img src='https://icons.iconarchive.com/icons/custom-icon-design/mono-general-1/256/faq-icon.png' width='70%' /></div>";
-                            echo "<a href='#'>" . $productoActual->getNombre() . "</a><br>";
-                            echo "Cantidad: " . $productoActual->getCantidad() . "<br>";
-                            echo "Valor: $" . $productoActual->getPrecioVenta();
-                            echo "</div>";
-                            echo "</div>";
-                            echo "</div>";
-                            
-                            if($i%4 == 3){
-                                echo "</div>";
-                            }
-                            $i++;
-                        }
-                        if($i%4 != 0){
-                            echo "</div>";
-                        }
-                        ?>
+						<?php
+						$i = 0;
+						$producto = new Producto();
+						$marca = new Marca();
+						$categoria = new Categoria();
+						$productos = $producto->consultarTodos();
+						foreach ($productos as $productoActual) {
+							if ($i % 4 == 0) {
+								echo "<div class='row mb-3'>";
+							}
+							echo "<div class='col-lg-3 col-md-4 col-sm-6' >";
+							echo "<div class='card text-bg-light'>";
+							echo "<div class='card-body'>";
+							echo "<div class='text-center'><img src='https://icons.iconarchive.com/icons/custom-icon-design/mono-general-1/256/faq-icon.png' width='70%' /></div>";
+							echo "<a href='#'>" . $productoActual->getNombre() . "</a><br>";
+							echo "Cantidad: " . $productoActual->getCantidad() . "<br>";
+							echo "Valor: $" . $productoActual->getPrecioVenta() . "<br>";
+							echo "Marca: " . $productoActual->getMarca()->getNombre() . "<br>";
+							echo "Categoría: " . $productoActual->getCategoria()->getNombre();
+							echo "</div>";
+							echo "</div>";
+							echo "</div>";
+
+							if ($i % 4 == 3) {
+								echo "</div>";
+							}
+							$i++;
+						}
+						if ($i % 4 != 0) {
+							echo "</div>";
+						}
+						?>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </body>
+
 </html>

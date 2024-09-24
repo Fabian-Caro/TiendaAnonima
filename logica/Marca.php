@@ -1,46 +1,50 @@
 <?php
-require_once ("./persistencia/Conexion.php");
-require ("./persistencia/MarcaDAO.php");
+require_once("./persistencia/Conexion.php");
+require("./persistencia/MarcaDAO.php");
 
-class Marca{
+class Marca
+{
     private $idMarca;
     private $nombre;
 
-    public function getIdMarca() {
+    public function getIdMarca()
+    {
         return $this->idMarca;
     }
 
-    public function getNombre() {
+    public function getNombre()
+    {
         return $this->nombre;
     }
 
-    public function setIdProducto($idMarca){
+    public function setIdProducto($idMarca)
+    {
         $this->idMarca = $idMarca;
     }
 
-    public function setNombre($nombre){
+    public function setNombre($nombre)
+    {
         $this->nombre = $nombre;
     }
 
-    public function __construct($idMarca=0, $nombre=""){
-        $this -> idMarca = $idMarca;
-        $this -> nombre = $nombre;
+    public function __construct($idMarca = 0, $nombre = "")
+    {
+        $this->idMarca = $idMarca;
+        $this->nombre = $nombre;
     }
-    
-    public function consultarTodos(){
+
+    public function consultarTodos()
+    {
         $marcas = array();
         $conexion = new Conexion();
-        $conexion -> abrirConexion();
+        $conexion->abrirConexion();
         $marcaDAO = new MarcaDAO();
-        $conexion -> ejecutarConsulta($marcaDAO -> consultarTodos());
-        while($registro = $conexion -> siguienteRegistro()){
+        $conexion->ejecutarConsulta($marcaDAO->consultarTodos());
+        while ($registro = $conexion->siguienteRegistro()) {
             $marca = new Marca($registro[0], $registro[1]);
             array_push($marcas, $marca);
         }
-        $conexion -> cerrarConexion();
-        return $marcas;        
+        $conexion->cerrarConexion();
+        return $marcas;
     }
-    
 }
-
-?>
