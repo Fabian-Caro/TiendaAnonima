@@ -12,6 +12,12 @@ class Conexion
 
     public function ejecutarConsulta($sentenciaSQL){
         $this->resultado = $this->mysqlConexion->query($sentenciaSQL);
+
+        if($this->resultado){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function siguienteRegistro()
