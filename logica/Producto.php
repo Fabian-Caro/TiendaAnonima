@@ -117,14 +117,28 @@ class Producto
         $conexion->cerrarConexion();
         return $productos;
     }
-
-    public function agregarProducto($idProducto, $nombreProducto, $cantidadProducto, $precioCompraProducto, $precioVentaProducto, $marcaProducto, $categoriaProducto, $idAdministrador) {
+    
+    
+    public function buscar($filtro){
+        $marcas = array();
+        $productos = array();
         $conexion = new Conexion();
-        $conexion->abrirConexion();
-
+        $conexion -> abrirConexion();
         $productoDAO = new ProductoDAO();
-        $conexion->ejecutarConsulta($productoDAO->agregarProducto($idProducto, $nombreProducto, $cantidadProducto, $precioCompraProducto, $precioVentaProducto, $marcaProducto, $categoriaProducto, $idAdministrador));
-
-        $conexion->cerrarConexion();
+        $conexion -> ejecutarConsulta($productoDAO -> buscar($filtro));
+        while($registro = $conexion -> siguienteRegistro()){
+            $marca = null;
+            if(array_key_exists($registro[5], $marcas)){
+                $marca = $marcas[$registro[5]];
+            }else{
+                $marca = new Marca($registro[5]);
+                $marca -> consultar();
+                $marcas[$registro[5]] = $marca;
+            }
+            $producto = new Producto($registro[0], $registro[1], $registro[2], $registro[3], $registro[4], $marca);
+            array_push($productos, $producto);
+        }
+        $conexion -> cerrarConexion();
+        return $productos;
     }
 }

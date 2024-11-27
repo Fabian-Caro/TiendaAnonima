@@ -18,10 +18,11 @@ class ProductoDAO{
         return "select idProducto, nombre, cantidad, precioCompra, precioVenta, Marca_idMarca 
                 from Producto";
     }
-
-    public function agregarProducto($idProducto, $nombreProducto, $cantidadProducto, $precioCompraProducto, $precioVentaProducto, $marcaProducto, $categoriaProducto, $idAdministrador) {
-        return "INSERT INTO producto (idProducto, nombre, cantidad, precioCompra, precioVenta, Marca_idMarca, Categoria_idCategoria, Administrador_idAdministrador) 
-                VALUES ('$idProducto', '$nombreProducto', $cantidadProducto, $precioCompraProducto, $precioVentaProducto, '$marcaProducto', '$categoriaProducto', $idAdministrador)";
+    
+    public function buscar($filtro){
+        return "select idProducto, nombre, cantidad, precioCompra, precioVenta, Marca_idMarca
+                from Producto
+                where nombre like '%" . $filtro . "%'";
     }
 }
 
