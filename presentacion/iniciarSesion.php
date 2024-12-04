@@ -7,16 +7,16 @@ if (isset($_POST["autenticar"])) {
 		$_SESSION["rol"] = "A";
 		header("Location: ?pid=" . base64_encode("presentacion/sesionAdministrador.php"));
 	} else {
-		$cliente = new Cliente(null, null, null, $_POST["correo"], md5($_POST["clave"]));
-		echo $cliente->getEstado();
+		$cliente = new Cliente(null, null, null, $_POST["correo"], md5($_POST["clave"]), null);
 
 		if ($cliente->autenticar()) {
-			if ($cliente->getEstado() == 1) {
-				$_SESSION["id"] = $cliente->getIdPersona();
-				$_SESSION["rol"] = "C";
-				header("Location: ?pid=" . base64_encode("presentacion/sesionCliente.php"));
-			} else {
+			$_SESSION["id"] = $cliente->getIdPersona();
+			$_SESSION["rol"] = "C";
+			$cliente -> consultar();
+			if($cliente -> getEstado() == 0) {
 				$error = "Su cuenta está deshabilitada.";
+			} else {
+				header("Location: ?pid=" . base64_encode("presentacion/sesionCliente.php"));
 			}
 		} else {
 			$error = "Error de correo o clave";
@@ -51,7 +51,7 @@ include("presentacion/encabezado.php") ?>
 								Cliente</a>
 						</h5>
 						<?php if ($error) { ?>
-							<div class="alert alert-danger mt-3" role="alert"><?php $error ?></div>
+							<div class="alert alert-danger mt-3" role="alert"><?php echo $error ?></div>
 						<?php } ?>
 					</form>
 				</div>

@@ -4,7 +4,7 @@ class Cliente extends Persona{
 
     private $estado;
     
-    public function __construct($idPersona=0, $nombre="", $apellido="", $correo="", $clave="", $estado=1){
+    public function __construct($idPersona=0, $nombre="", $apellido="", $correo="", $clave="", $estado=""){
         parent::__construct($idPersona, $nombre, $apellido, $correo, $clave);
         $this -> estado = $estado;
     }
@@ -48,11 +48,14 @@ class Cliente extends Persona{
         $conexion -> abrirConexion();
         $clienteDAO = new ClienteDAO($this -> idPersona);
         $conexion -> ejecutarConsulta($clienteDAO -> consultar());
+        
         $registro = $conexion -> siguienteRegistro();
-        $this -> nombre = $registro[0];
-        $this -> apellido = $registro[1];
-        $this -> correo = $registro[2];
-        $this -> estado = $registro[3];
+        $this -> idPersona = $registro[0];
+        $this -> nombre = $registro[1];
+        $this -> apellido = $registro[2];
+        $this -> correo = $registro[3];
+        $this -> clave = $registro[4];
+        $this -> estado = $registro[5];
         $conexion -> cerrarConexion();
     }
 
@@ -77,8 +80,7 @@ class Cliente extends Persona{
         $clienteDAO = new ClienteDAO($idCliente, null, null, null, null, $estado);
         $conexion->ejecutarConsulta($clienteDAO->actualizar($idCliente, $estado));
         return true;
-    }
-    
+    }   
 }
 
 ?>
