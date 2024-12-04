@@ -20,7 +20,7 @@
 			<ul class="navbar-nav">
 				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
 					href="#" role="button" data-bs-toggle="dropdown"
-					aria-expanded="false"><?php echo $cliente -> getNombre() . " " . $cliente -> getApellido() ?></a>
+					aria-expanded="false"><?php echo $cliente -> getNombre() . " " . $cliente -> getApellido() . " " . $cliente->getEstado() ?></a>
 					<ul class="dropdown-menu">
                         <li><a class='dropdown-item' href='?cerrarSesion=true'>Cerrar Sesion</a></li>
 					</ul></li>

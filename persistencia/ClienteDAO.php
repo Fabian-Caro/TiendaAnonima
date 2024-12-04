@@ -8,7 +8,7 @@ class ClienteDAO{
     private $clave;
     private $estado;
 
-    public function __construct($idPersona=null, $nombre=null, $apellido=null, $correo=null, $clave=null, $estado=null){
+    public function __construct($idPersona=0, $nombre=null, $apellido=null, $correo=null, $clave=null, $estado=null){
         $this -> idPersona = $idPersona;
         $this -> nombre = $nombre;
         $this -> apellido = $apellido;
@@ -30,8 +30,14 @@ class ClienteDAO{
     }
 
     public function registrar(){
-        return "insert into Cliente (nombre, apellido, correo, clave, estado)
-                values ('" . $this -> nombre . "', '" .
+        echo "ID: " . $this->nombre;
+        echo " Nombre: " . $this->nombre;
+        echo " Apellido: " . $this->apellido;
+        echo " correo: " . $this->correo;
+        echo " clave: " . $this->clave;
+        echo " Estado: " . $this->estado;
+        return "INSERT INTO Cliente (nombre, apellido, correo, clave, estado)
+                VALUES ('" . $this -> nombre . "', '" .
                              $this -> apellido . "', '" .
                              $this -> correo . "', '" .
                              $this -> clave . "', '" . 

@@ -17,17 +17,16 @@ $clientes = $cliente->buscar($filtro);
 				echo "</tr>";
 
 				foreach ($clientes as $clienteActual) {
-					echo $cliente->getEstado();
+					//echo $cliente->getEstado();
 					echo "<tr>";
 					echo "<td>" . str_ireplace($filtro, "<strong>" . substr($clienteActual->getNombre(), stripos($clienteActual->getNombre(), $filtro), strlen($filtro)) . "</strong>", $clienteActual->getNombre()) . "</td>";
 					echo "<td>" . str_ireplace($filtro, "<strong>" . substr($clienteActual->getApellido(), stripos($clienteActual->getApellido(), $filtro), strlen($filtro)) . "</strong>", $clienteActual->getApellido()) . "</td>";
 					echo "<td>" . $clienteActual->getCorreo() . "</td>";
 					echo "<td>";
-					echo "<div id='resultado'>";
+					echo "<div id='estadode" . $clienteActual->getIdPersona() . "'>";
 					echo "<button class='estado-icon' id='estado_" . $clienteActual->getIdPersona() . "' data-id='" . $clienteActual->getIdPersona() . "' data-estado='" . $clienteActual->getEstado() . "' style='cursor: pointer;'>";
 					if ($clienteActual->getEstado() == 1) {
 						echo "<img src='img/tic_verde.png' alt='activo' style='width: 20px; height: 20px;'>";
-						
 					} else {
 						echo "<img src='img/tic_prohibido.png' alt='bloqueado' style='width: 20px; height: 20px;'>";
 					}
@@ -55,7 +54,7 @@ $clientes = $cliente->buscar($filtro);
 		}
 
 		$(document).off('click', '.estado-icon');
-		
+
 		$(document).on('click', '.estado-icon', function() {
 			console.log('clic');
 			var idCliente = $(this).data('id');
@@ -68,7 +67,7 @@ $clientes = $cliente->buscar($filtro);
 			var url = "indexAjax.php?pid=<?php echo base64_encode('presentacion/administracion/actualizarEstadoClienteAjax.php') . '&idCliente=' ?>" + idCliente + "&estado=" + nuevoEstado;
 			console.log('URL de la solicitud:', url);
 
-			$("#resultado").load(url, function(response, status, xhr) {
+			$("#estadode" + idCliente).load(url, function(response, status, xhr) {
 				console.log('url', url);
 				console.log('Respuesta de la carga:', response);
 				console.log('Estado de la carga:', status);
