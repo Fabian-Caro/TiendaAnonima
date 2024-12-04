@@ -20,11 +20,11 @@ class ClienteDAO{
     public function autenticar(){
         return "select idCliente
                 from Cliente 
-                where correo = '" . $this -> correo . "' and clave = '" . $this -> clave . "'";
+                where correo = '" . $this -> correo . "' and clave = '" . $this -> clave . "'" ;
     }
     
     public function consultar(){
-        return "select nombre, apellido, correo, estado
+        return "select idCliente, nombre, apellido, correo, clave, estado
                 from Cliente
                 where idCliente = '" . $this -> idPersona . "'";
     }
