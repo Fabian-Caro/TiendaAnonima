@@ -4,7 +4,7 @@ class Cliente extends Persona{
 
     private $estado;
     
-    public function __construct($idPersona=0, $nombre="", $apellido="", $correo="", $clave="", $estado=""){
+    public function __construct($idPersona=0, $nombre="", $apellido="", $correo="", $clave="", $estado=1){
         parent::__construct($idPersona, $nombre, $apellido, $correo, $clave);
         $this -> estado = $estado;
     }

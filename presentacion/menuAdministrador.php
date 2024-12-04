@@ -16,8 +16,6 @@
 						<li><a class='dropdown-item' href='?pid=<?php echo base64_encode("presentacion/producto/buscarProducto.php") ?>'>Buscar Producto</a></li>
 					</ul>
 				</li>
-			</ul>
-			<ul class="navbar-nav me-auto">
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Usuarios</a>
 					<ul class="dropdown-menu">
@@ -27,6 +25,7 @@
 					</ul>
 				</li>
 			</ul>
+			
 			<ul class="navbar-nav">
 				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
 						href="#" role="button" data-bs-toggle="dropdown"
